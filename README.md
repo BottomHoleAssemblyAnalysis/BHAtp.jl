@@ -9,4 +9,4 @@
 
 ## Introduction
 
-Part of the BottomHoleAssemblyAnalysis Github orcanizatioin.
+Part of the BottomHoleAssemblyAnalysis Github orcanizatioin. Updated config file.
