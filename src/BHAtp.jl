@@ -1,8 +1,9 @@
 module BHAtp
 
 # package code goes here
-greet() = "Hello BHA World!"
 
-export greet
+using Reexport
+
+@reexport using PtFEM
 
 end # module
