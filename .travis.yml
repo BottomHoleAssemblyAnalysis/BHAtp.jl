@@ -26,7 +26,10 @@ git:
 
 ## uncomment the following lines to override the default test script
 #script:
-#  - julia -e 'Pkg.clone(pwd()); Pkg.build("BHAtp"); Pkg.test("BHAtp"; coverage=true)'
+script:
+  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+  - julia -e 'using Pkg; Pkg.add("Compat"); Pkg.test("BHAtp"; coverage=true)'
+  
 after_success:
   # push coverage results to Coveralls
   - julia -e 'cd(Pkg.dir("BHAtp")); Pkg.add("Coverage"); using Coverage; Coveralls.submit(Coveralls.process_folder())'
