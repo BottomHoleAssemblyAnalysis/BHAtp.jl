@@ -28,7 +28,7 @@ git:
 #script:
 script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-  - julia -e 'using Pkg; Pkg.add("Compat"); Pkg.checkout("PtFEM"); Pkg.test("BHAtp"; coverage=true)'
+  - julia -e 'using Pkg; Pkg.add("Compat"); Pkg.test("BHAtp"; coverage=true)'
   
 after_success:
   # push coverage results to Coveralls
