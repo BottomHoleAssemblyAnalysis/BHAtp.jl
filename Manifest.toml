@@ -204,9 +204,9 @@ version = "0.4.4"
 
 [[Plots]]
 deps = ["Contour", "FixedPointNumbers", "GR", "JSON", "Measures", "NaNMath", "PlotThemes", "PlotUtils", "RecipesBase", "Reexport", "Requires", "Showoff", "StaticArrays", "StatsBase"]
-path = "/Users/rob/.julia/dev/Plots"
+git-tree-sha1 = "9d8426356fb2800a8c76c3d3df734eae79948a41"
 uuid = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
-version = "0.17.2+"
+version = "0.17.2"
 
 [[Printf]]
 uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
