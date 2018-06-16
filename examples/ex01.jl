@@ -3,7 +3,7 @@ Compare formulas at:
 http://www.awc.org/pdf/codes-standards/publications/design-aids/AWC-DA6-BeamFormulas-0710.pdf
 =#
 
-using BHAtp
+using Compat, BHAtp
 
 ProjDir = dirname(@__FILE__)
 
@@ -11,7 +11,8 @@ data = Dict(
   # Frame(nels, nn, ndim, nst, nip, finite_element(nod, nodof))
   :struc_el => Frame(200, 201, 3, 1, 1, Line(2, 3)),
   :properties => [1.0e6 1.0e6 1.0e6 3.0e5;],
-  :x_coords => range(0, stop=4, length=201),
+  #:x_coords => range(0, stop=4, length=201),
+  #:x_coords => linspace(0, 4, 201),
   :y_coords => zeros(201),
   :z_coords => zeros(201),
   :g_num => [
@@ -24,6 +25,8 @@ data = Dict(
   :loaded_nodes => [
     (101, [0.0 -10000.0 0.0 0.0 0.0 0.0])]
 )
+
+data[:x_coords] = VERSION.minor < 7 ? linspace(0, 4, 201) :  range(0, stop=4, length=201)
 
 data |> display
 println()
