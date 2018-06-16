@@ -1,70 +1,66 @@
+#=
+Compare formulas at:
+http://www.awc.org/pdf/codes-standards/publications/design-aids/AWC-DA6-BeamFormulas-0710.pdf
+=#
+
 using BHAtp
 
 ProjDir = dirname(@__FILE__)
 
 data = Dict(
   # Frame(nels, nn, ndim, nst, nip, finite_element(nod, nodof))
-  :struc_el => Frame(3, 4, 3, 1, 1, Line(2, 3)),
-  :properties => [
-    4.0e6 1.0e6 0.3e6 0.3e6],
-  :x_coords => [0.0, 5.0, 5.0, 5.0],
-  :y_coords => [5.0, 5.0, 5.0, 0.0],
-  :z_coords => [5.0, 5.0, 0.0, 0.0],
-  :gamma => [0.0, 0.0, 90.0],
+  :struc_el => Frame(200, 201, 3, 1, 1, Line(2, 3)),
+  :properties => [1.0e6 1.0e6 1.0e6 3.0e5;],
+  :x_coords => range(0, stop=4, length=201),
+  :y_coords => zeros(201),
+  :z_coords => zeros(201),
   :g_num => [
-    1 3 4;
-    2 2 3],
+    collect(1:200)';
+    collect(2:201)'],
   :support => [
     (1, [0 0 0 0 0 0]),
-    (4, [0 0 0 0 0 0])
+    (201, [0 0 0 0 0 0]),
     ],
   :loaded_nodes => [
-    (2, [0.0 -100.0 0.0 0.0 0.0 0.0])]
+    (101, [0.0 -10000.0 0.0 0.0 0.0 0.0])]
 )
-
-@time m, dis_df, fm_df = p44(data)
 
 data |> display
 println()
 
-@time fem, dis_df, fm_df = p44(data)
+m, dis_df, fm_df = p44(data)
+
+println("Displacements:")
+m.displacements |> display
 println()
 
-display(dis_df)
+println("Actions:")
+m.actions |> display
 println()
-display(fm_df)
+
+println("y displacements:")
+m.displacements[2,:] |> display
 println()
-  
-if VERSION.minor < 6
-  using Plots
-  gr(size=(400,600))
 
-  p = Vector{Plots.Plot{Plots.GRBackend}}(3)
-  titles = ["p44.1 rotations", "p44.1 y shear force", "p44.1 z moment"]
-  moms = vcat(
-    convert(Array, fm_df[:, :z1_Moment]), 
-    convert(Array, fm_df[:, :z2_Moment])[end]
-  )
-  fors = vcat(
-    convert(Array, fm_df[:, :y1_Force]), 
-    convert(Array, fm_df[:, :y2_Force])[end]
-  )
-  x_coords = data[:x_coords]
-  
-  p[1] = plot(fem.displacements[3,:], ylim=(-0.002, 0.002),
-    xlabel="node", ylabel="rotation [radians]", color=:red,
-    line=(:dash,1), marker=(:circle,4,0.8,stroke(1,:black)),
-    title=titles[1], leg=false)
-  p[2] = plot(fors, lab="y Shear force", ylim=(-150.0, 250.0),
-    xlabel="node", ylabel="shear force [N]", color=:blue,
-    line=(:dash,1), marker=(:circle,4,0.8,stroke(1,:black)),
-    title=titles[2], leg=false)
-  p[3] = plot(moms, lab="z Moment", ylim=(-10.0, 150.0),
-    xlabel="node", ylabel="z moment [Nm]", color=:green,
-    line=(:dash,1), marker=(:circle,4,0.8,stroke(1,:black)),
-    title=titles[3], leg=false)
+println("y moment actions:")
+m.actions[12,:] |> display
+println()
 
-  plot(p..., layout=(3, 1))
-  savefig(ProjDir*"/Ex44.1.png")
-  
-end
+using Plots
+gr(size=(400,600))
+
+p = Vector{Plots.Plot{Plots.GRBackend}}(3)
+p[1] = plot(m.x_coords, m.displacements[2,:], ylim=(-0.004, 0.001), lab="Displacement", 
+ xlabel="x [m]", ylabel="deflection [m]", color=:red)
+p[2] = plot(m.actions[2,:], lab="Shear force", ylim=(-6000, 6000), xlabel="element",
+  ylabel="shear force [N]", palette=:greens,fill=(0,:auto),α=0.6)
+p[3] = plot(m.actions[12,:], lab="Moment", ylim=(-6000, 6000), xlabel="element",
+  ylabel="moment [Nm]", palette=:grays,fill=(0,:auto),α=0.6)
+
+plot(p..., layout=(3, 1))
+savefig(ProjDir*"/figure-24.png")
+#=
+plot!()
+gui()
+=#
+

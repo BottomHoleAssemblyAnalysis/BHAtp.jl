@@ -14,5 +14,6 @@ println("\n\nRunning BottomHoleAssemblyAnalysis/BHatp.jl tests:\n\n")
   for test in code_tests
       println("\n\n  * $(test) *\n")
       include("test_"*test)
+      println()
   end
 end
