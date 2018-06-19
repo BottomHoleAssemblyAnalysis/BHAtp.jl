@@ -7,46 +7,48 @@ using Compat, BHAtp
 
 ProjDir = dirname(@__FILE__)
 
+#=
+Compare formulas at:
+http://www.awc.org/pdf/codes-standards/publications/design-aids/AWC-DA6-BeamFormulas-0710.pdf
+=#
+
+N = 52
+Np1 = N + 1
+Nhp1 = Int(N/2) + 1
+
 data = Dict(
   # Frame(nels, nn, ndim, nst, nip, finite_element(nod, nodof))
-  :struc_el => Frame(200, 201, 3, 1, 1, Line(2, 3)),
+  :struc_el => Frame(N, Np1, 3, 1, 1, Line(2, 3)),
   :properties => [1.0e6 1.0e6 1.0e6 3.0e5;],
-  #:x_coords => range(0, stop=4, length=201),
-  #:x_coords => linspace(0, 4, 201),
-  :y_coords => zeros(201),
-  :z_coords => zeros(201),
+  :y_coords => zeros(Np1),
+  :z_coords => zeros(Np1),
   :g_num => [
-    collect(1:200)';
-    collect(2:201)'],
+    collect(1:N)';
+    collect(2:Np1)'],
   :support => [
-    (1, [0 0 0 0 0 0]),
-    (201, [0 0 0 0 0 0]),
+    (1, [1 0 0 0 0 0]),
+    (Int(N/4),  [1 0 0 0 0 1]),
+    (Np1, [0 0 0 0 0 1]),
     ],
   :loaded_nodes => [
-    (101, [0.0 -10000.0 0.0 0.0 0.0 0.0])]
+    (Nhp1, [0.0 -10000.0 0.0 0.0 0.0 0.0])]
 )
 
-data[:x_coords] = VERSION.minor < 7 ? linspace(0, 4, 201) :  range(0, stop=4, length=201)
+data[:x_coords] = VERSION.minor < 7 ? linspace(0, 4, Np1) :  range(0, stop=4, length=Np1)
+
+@time m, dis_df, fm_df = p44_1(data)
 
 data |> display
 println()
 
-m, dis_df, fm_df = p44(data)
+m, dis_df, fm_df = p44_1(data)
 
 println("Displacements:")
-m.displacements |> display
+display(dis_df)
 println()
 
 println("Actions:")
-m.actions |> display
-println()
-
-println("y displacements:")
-m.displacements[2,:] |> display
-println()
-
-println("y moment actions:")
-m.actions[12,:] |> display
+display(fm_df)
 println()
 
 using Plots
