@@ -1,4 +1,5 @@
-using BHAtp, Test
+using BHAtp
+using Test
 
 #=
 Compare formulas at:

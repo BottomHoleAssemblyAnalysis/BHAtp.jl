@@ -1,12 +1,21 @@
 ## Documentation: http://docs.travis-ci.com/user/languages/julia/
+
 language: julia
+
 os:
   - linux
   - osx
+  
 julia:
   - nightly
+  
+matrix:
+  allow_failures:
+    - os: osx
+  
 notifications:
-  email: false
+  email: true
+
 git:
   depth: 99999999
 
@@ -28,7 +37,7 @@ git:
 #script:
 script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-  - julia -e 'using Pkg; Pkg.add("Compat"); Pkg.test("BHAtp"; coverage=true)'
+  - julia -e 'using Pkg; Pkg.test("BHAtp"; coverage=true)'
   
 after_success:
   # push coverage results to Coveralls
