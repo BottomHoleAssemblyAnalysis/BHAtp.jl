@@ -8,6 +8,12 @@ using Compat, BHAtp
 ProjDir = dirname(@__FILE__)
 
 #=
+This example uses a downwards z-axis, an x-axis to the right and an y-axis coming towards you
+
+
+=#
+
+#=
 Compare formulas at:
 http://www.awc.org/pdf/codes-standards/publications/design-aids/AWC-DA6-BeamFormulas-0710.pdf
 =#
@@ -27,11 +33,11 @@ data = Dict(
     collect(2:Np1)'],
   :support => [
     (1, [0 0 0 0 0 0]),
-    #(Int(N/4),  [0 0 0 0 1 0]),
+    (Int(N/2),  [0 0 1 0 1 0]),
     (Int(3N/4),  [0 0 1 0 1 0]),
     (Np1, [1 0 1 0 1 0]),
     ],
-  :loaded_nodes => [(i, [-20000.0/Np1 0.0 -20000.0/Np1 0.0 0.0 0.0]) for i in 1:Np1]
+  :loaded_nodes => [(i, [-20000.0/Np1 0.0 20000.0/Np1 0.0 0.0 0.0]) for i in 1:Np1]
 )
 
 data[:z_coords] = VERSION.minor < 7 ? linspace(0, 4, Np1) :  range(0, stop=4, length=Np1)
