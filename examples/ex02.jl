@@ -1,8 +1,3 @@
-#=
-Compare formulas at:
-http://www.awc.org/pdf/codes-standards/publications/design-aids/AWC-DA6-BeamFormulas-0710.pdf
-=#
-
 using Compat, BHAtp
 
 ProjDir = dirname(@__FILE__)
