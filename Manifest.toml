@@ -158,9 +158,9 @@ version = "0.2.0"
 
 [[Missings]]
 deps = ["Compat"]
-git-tree-sha1 = "4b7feda2672b8163c95738533671afb4493b6d03"
+git-tree-sha1 = "866fb034899be6055dcb6cb1a70fbda379bb0b55"
 uuid = "e1d29d7a-bbdc-5cf2-9ac0-f12de2c33e28"
-version = "0.2.9"
+version = "0.2.10"
 
 [[Mmap]]
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
@@ -213,7 +213,7 @@ uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
 
 [[PtFEM]]
 deps = ["Compat", "CustomUnitRanges", "DataFrames", "Dates", "Documenter", "GR", "Interpolations", "LinearAlgebra", "OffsetArrays", "Plots", "Printf", "QuadGK", "SparseArrays", "SuiteSparse"]
-git-tree-sha1 = "95bed46f3ab47aabfb37d5d5b0232481921cb02a"
+git-tree-sha1 = "6aad0397f81440f86549d28f1fd6256892cae2f1"
 repo-rev = "master"
 repo-url = "https://github.com/PtFEM/PtFEM.jl.git"
 uuid = "9b64898b-da2a-5774-a656-fd6fb605642c"
@@ -286,9 +286,9 @@ uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 
 [[StaticArrays]]
 deps = ["Compat", "InteractiveUtils", "LinearAlgebra", "Random"]
-git-tree-sha1 = "a114d61f0ffe541c3ae2cddef4b44c844cebb4bf"
+git-tree-sha1 = "39adecbac9304fe6991920bd10fc67b67766275f"
 uuid = "90137ffa-7385-5640-81b9-e52037218182"
-version = "0.7.1"
+version = "0.7.2"
 
 [[StatsBase]]
 deps = ["Compat", "DataStructures", "LinearAlgebra", "Missings", "Printf", "Random", "SortingAlgorithms", "SparseArrays", "Test"]
