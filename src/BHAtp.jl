@@ -2,7 +2,7 @@ module BHAtp
 
 # package code goes here
 
-using Reexport, DataFrames
+using Reexport, DataFrames, Statistics
 
 if VERSION.minor > 6
   @eval using SparseArrays, LinearAlgebra 
