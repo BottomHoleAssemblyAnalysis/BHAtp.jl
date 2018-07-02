@@ -6,6 +6,8 @@ Compare formulas at:
 http://www.awc.org/pdf/codes-standards/publications/design-aids/AWC-DA6-BeamFormulas-0710.pdf
 =#
 
+println("Test when editing in Atom")
+
 N = 20
 Np1 = N + 1
 Nhp1 = Int(N/2) + 1
@@ -30,9 +32,8 @@ data = Dict(
 
 @time m, dis_df, fm_df = p44_1(data)
 
-# See figure 24 in above reference (Δmax): 
+# See figure 24 in above reference (Δmax):
 @eval @test round.(m.displacements[2,Nhp1], digits=11) ≈ -0.00333333333
 
-# See figure 24 in above reference (Mmax): 
+# See figure 24 in above reference (Mmax):
 @eval @test m.actions[12,Nhp1] ≈ 3999.9999999975844
-  
