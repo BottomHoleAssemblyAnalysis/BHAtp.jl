@@ -37,7 +37,7 @@ git:
 #script:
 script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-  - julia -e 'using Pkg; Pkg.add("https://github.com/BottomHoleAssemblyAnalysis/BHAtp.jl")'
+  #- julia -e 'using Pkg; Pkg.add("https://github.com/BottomHoleAssemblyAnalysis/BHAtp.jl")'
   - julia -e 'using Pkg; Pkg.test("BHAtp"; coverage=true)'
   
 after_success:
