@@ -6,7 +6,7 @@ Compare formulas at:
 http://www.awc.org/pdf/codes-standards/publications/design-aids/AWC-DA6-BeamFormulas-0710.pdf
 =#
 
-println("Test when editing in Atom")
+println("Test when editing in Atom\n")
 
 N = 20
 Np1 = N + 1
