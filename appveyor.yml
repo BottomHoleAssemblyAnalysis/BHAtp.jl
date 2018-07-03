@@ -27,5 +27,5 @@ build_script:
   - IF EXIST .git\shallow (git fetch --unshallow)
 
 test_script:
-  #- C:\projects\julia\bin\julia --check-bounds=yes -e "using Pkg; Pkg.add(\"https://github.com/BottomHoleAssemblyAnalysis/BHAtp.jl\"); Pkg.test(\"BHAtp\")"
-  - C:\projects\julia\bin\julia --check-bounds=yes -e "using Pkg; Pkg.test(\"BHAtp\")"
+  #- C:\projects\julia\bin\julia --check-bounds=yes -e "using Pkg; Pkg.test(\"BHAtp\")"
+  - C:\projects\julia\bin\julia --check-bounds=yes -e "using Pkg; Pkg.add(\"https://github.com/BottomHoleAssemblyAnalysis/BHAtp.jl\"); Pkg.test(\"BHAtp\")"
