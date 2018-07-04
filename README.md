@@ -15,4 +15,6 @@ Codecov: [![codecov.io](http://codecov.io/github/BottomHoleAssemblyAnalysis/BHAt
 
 Part of the BottomHoleAssemblyAnalysis Github organizatioin.
 
+BHAtp.jl computes the theoretical performance (tp) of a bottom hole assembly inside a bore hole in terms of its tendency to 'build' or 'drop'.
+
 This Github organization will contain a set of packages/projects related to the analysis of Bottom Hole Assemblies (BHA).
