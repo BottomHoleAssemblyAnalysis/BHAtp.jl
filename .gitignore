@@ -1,3 +1,4 @@
+Manifest.toml
 *.jl.cov
 *.jl.*.cov
 *.jl.mem
@@ -8,4 +9,3 @@ output/
 output/*
 docs/build/
 docs/site/
-Manifest.toml
