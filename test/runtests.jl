@@ -4,7 +4,8 @@ using Test
 # write your own tests here
 
 code_tests = [
-  "ex01.jl"
+  "ex01.jl",
+  "fisher_a1_01.jl"
 ]
 
 println("\n\nRunning BottomHoleAssemblyAnalysis/BHatp.jl tests:\n\n")
@@ -15,5 +16,6 @@ println("\n\nRunning BottomHoleAssemblyAnalysis/BHatp.jl tests:\n\n")
       println("\n\n  * $(test) *\n")
       include("test_"*test)
       println()
-  end
+  end  
+  
 end
