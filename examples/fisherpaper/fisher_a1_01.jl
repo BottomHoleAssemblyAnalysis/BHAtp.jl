@@ -1,4 +1,4 @@
-using BHAtp, DataFrames, Test
+using BHAtp, DataFrames, Distributed, Test
 
 ProjDir = dirname(@__FILE__)
 ProjName = split(ProjDir, "/")[end]
@@ -36,8 +36,10 @@ traj = [
   ( 60.0,      12.25)
 ]
 
-wobs = 45:5:55
-incls = 35:5:55           # Or e.g. incls = [5, 10]
+wobrange = 45:5:55
+inclinationrange = 35:5:55           # Or e.g. incls = [5, 10]
+
+BHAtp.tprun(segs, wobrange, inclinationrange, p44_1)
 
 #=
 Needs to generate something like:
