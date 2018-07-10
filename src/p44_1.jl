@@ -203,7 +203,7 @@ function p44_1(data::Dict{Symbol, Any})
     g_g[:, i] = g
   end
   
-  println("There are $(neq) equations.")
+  #println("There are $(neq) equations.")
   
   gsm = spzeros(neq, neq)
   for i in 1:nels

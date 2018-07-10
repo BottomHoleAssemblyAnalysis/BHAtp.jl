@@ -1,7 +1,5 @@
 function runcase(t::Tuple)
   
-  println("\n---------------------\nwob = $(t[2]), incl = $(t[3])\n---------------------\n")
-
   N = 20
   Np1 = N + 1
   Nhp1 = Int(N/2) + 1
@@ -24,7 +22,8 @@ function runcase(t::Tuple)
       (Nhp1, [0.0 -10000.0 0.0 0.0 0.0 0.0])]
   )
 
-  t[4](data)
+  res = t[4](data)
+  println("Case wob = $(t[2]), incl = $(t[3]) done!")
   
  end 
  
