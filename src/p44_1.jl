@@ -247,7 +247,7 @@ function p44_1(data::Dict{Symbol, Any})
 
   cfgsm = VERSION.minor > 6 ? cholesky(gsm) : cholfact(gsm)
   loads[1:neq] = cfgsm \ loads[1:neq]
-  println()
+  #println()
 
   displacements = zeros(size(nf))
   for i in 1:size(displacements, 1)
