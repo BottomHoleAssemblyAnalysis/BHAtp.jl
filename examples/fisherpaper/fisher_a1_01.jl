@@ -39,7 +39,9 @@ traj = [
 wobrange = 45:5:55
 inclinationrange = 35:5:55           # Or e.g. incls = [5, 10]
 
-BHAtp.tprun(segs, wobrange, inclinationrange, p44_1)
+results = BHAtp.tprun(segs, wobrange, inclinationrange, p44_1)
+
+println(size(results))
 
 #=
 Needs to generate something like:

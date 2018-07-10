@@ -1,5 +1,3 @@
-using Test
-
 function runcase(t::Tuple)
   
   println("\n---------------------\nwob = $(t[2]), incl = $(t[3])\n---------------------\n")
@@ -26,13 +24,7 @@ function runcase(t::Tuple)
       (Nhp1, [0.0 -10000.0 0.0 0.0 0.0 0.0])]
   )
 
-  @time m, dis_df, fm_df = t[4](data)
-
-  # See figure 24 in above reference (Δmax):
-  @test round.(m.displacements[2,Nhp1], digits=11) ≈ -0.00333333333
-
-  # See figure 24 in above reference (Mmax):
-  @test m.actions[12,Nhp1] ≈ 3999.9999999975844
+  t[4](data)
   
  end 
  
