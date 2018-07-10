@@ -1,10 +1,8 @@
 using Test
 
 function runcase(t::Tuple)
-  #@eval using BHAtp
-  #@eval using Test
   
-  println("wob = $(t[2]), incl = $(t[3])\n")
+  println("\n---------------------\nwob = $(t[2]), incl = $(t[3])\n---------------------\n")
 
   N = 20
   Np1 = N + 1
