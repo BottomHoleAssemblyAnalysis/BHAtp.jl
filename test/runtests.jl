@@ -1,8 +1,6 @@
 using BHAtp
 using Test
 
-# write your own tests here
-
 code_tests = [
   "ex01.jl",
   "fisher_a1_01.jl"

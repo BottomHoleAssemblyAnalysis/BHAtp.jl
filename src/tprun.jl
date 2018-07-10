@@ -1,6 +1,6 @@
- function tprun(segs, wobrange, inclinationrange, computefunction::Function)
+ function tprun(segs, wobrange, inclinationrange, computefunction::Function, pdir)
    
-   casetable = createcasetable(segs, wobrange, inclinationrange, computefunction)
+   casetable = createcasetable(segs, wobrange, inclinationrange, computefunction, pdir)
    pmap(runcase, casetable)
    
  end
