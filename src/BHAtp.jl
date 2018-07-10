@@ -3,10 +3,7 @@ module BHAtp
 # package code goes here
 
 using Reexport, DataFrames, Statistics, Distributed
-
-if VERSION.minor > 6
-  @eval using SparseArrays, LinearAlgebra 
-end
+using SparseArrays, LinearAlgebra 
 
 @reexport using PtFEM
 
