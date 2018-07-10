@@ -39,9 +39,8 @@ traj = [
 wobrange = 45:5:55
 inclinationrange = 35:5:55           # Or e.g. incls = [5, 10]
 
-results = BHAtp.tprun(segs, wobrange, inclinationrange, p44_1)
-
-println(size(results))
+results = tprun(segs, wobrange, inclinationrange, p44_1)
+println("\nSize of result  array of tuples = $(size(results))")
 
 #=
 Needs to generate something like:
