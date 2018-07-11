@@ -1,7 +1,7 @@
 name = "BHAtp"
 uuid = "6583cbc6-6f1c-11e8-30da-a3ec7cc7062f"
 authors = ["Rob J Goedman <goedman@mac.com>"]
-version = "0.1.0"
+version = "0.1.1"
 
 [deps]
 Compat = "34da2185-b29b-5c13-b0c7-acf172513d20"
