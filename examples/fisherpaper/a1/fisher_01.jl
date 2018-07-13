@@ -40,7 +40,7 @@ wobrange = 45:5:55
 inclinationrange = 35:5:55           # Or e.g. incls = [5, 10]
 
 println()
-results = tprun(segs, wobrange, inclinationrange, p44_1, ProjDir)
+@time results = tprun(segs, wobrange, inclinationrange, p44_1, ProjDir)
 
 sleep(1)
 println("\nSize of result  array of tuples = $(size(results))")
