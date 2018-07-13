@@ -7,15 +7,8 @@ ProjName = split(ProjDir, "/")[end]
 #bha.ratio = 1.7
 #bha.medium = :lightmud
 
-materials = materialtable()
-println()
-display(materials)
-println()
-
-media = mediatable()
-println()
-display(media)
-println()
+materials = materialtable();
+media = mediatable();
 
 segments = [
 # Element type,  Material,    Length,     OD,         ID,        fc,     noofelements
@@ -36,48 +29,16 @@ traj = [
    60.0,      12.25
 ]
 
-segment_types = [Symbol, Symbol, Float64, Float64, Float64, Float64, Int]
-segment_names = [:eltype, :material, :length, :id, :od, :frictioncoefficient, :noofelements]
-
-segs = reshape(segments, (7, :));
-
-segments = DataFrame(segment_types, segment_names, 0)
-for i in 1:size(segs, 2)
-  seg = segs[:, i]
-    append!(segments,
-      DataFrame(eltype=seg[1], material=seg[2], length=seg[3], id=seg[4], od=seg[5],
-        frictioncoefficient=seg[6], noofelements=seg[7])
-    )
-end
+(segmentdf, segs) = createsegmentdf(segments)
 
 println()
-display(segments)
+display(segmentdf)
 println()
 
-element_types = [Symbol, Symbol, Float64, Float64, Float64, Int, Float64, Float64, Float64, Float64]
-element_names = [:eltype, :material, :length, :id, :od, :etype, :ea, :ei, :gj, :holediameter]
-
-elements = DataFrame(element_types, element_names, 0)
-j = 0
-for i in 1:size(segments, 1)
-  seg = segments[i, :]
-  if seg[:eltype][1] in [:collar, :pipe]
-    # New etype
-    j += 1          
-    append!(elements, 
-      DataFrame(eltype=seg[:eltype][1], material=seg[:material][1],
-        length=seg[:length][1], id=seg[:id][1], od=seg[:od][1], etype=j, 
-        ea=0.0, 
-        ei=1.0, 
-        gj=2.0, 
-        holediameter=traj[2]
-      )
-    )
-  end
-end
+elementdf = createelementdf(segmentdf, traj)
 
 println()
-display(elements)
+display(elementdf)
 println()
 
 wobrange = 45:5:55

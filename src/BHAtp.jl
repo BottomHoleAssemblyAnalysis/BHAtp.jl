@@ -9,6 +9,8 @@ using SparseArrays, LinearAlgebra
 
 include("base/materialtable.jl")
 include("base/mediatable.jl")
+include("base/createsegmentdf.jl")
+include("base/createelementdf.jl")
 include("base/createcasetable.jl")
 include("base/runcase.jl")
 include("base/tprun.jl")
@@ -18,6 +20,8 @@ export
   tprun,
   materialtable,
   mediatable,
+  createsegmentdf,
+  createelementdf,
   p44_1
 
 end # module
