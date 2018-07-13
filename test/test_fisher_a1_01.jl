@@ -7,7 +7,7 @@ cd(ProjDir) do
   include(joinpath(ProjDir, "a1/fisher_01.jl"))
   
   println("testing: size(segs) == (4, 10)")
-  @test size(segs) == (4, 10)
+  @test size(segs) == (7, 10)
 
   isdir("tmp") &&
     rm("tmp", recursive=true);

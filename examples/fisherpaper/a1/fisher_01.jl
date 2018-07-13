@@ -7,43 +7,87 @@ ProjName = split(ProjDir, "/")[end]
 #bha.ratio = 1.7
 #bha.medium = :lightmud
 
-segs2 = [
-# Element type,  Material,    Length,     OD,         ID,        fc
-  :bit,                    :steel ,        0.00,      2.75,      12.25,     0.0,
-  :collar ,              :monel ,    25.00,    2.75,   7.75,  0.0,
-  :stabilizer,         :steel,         0.00,        2.75,   12.125,  0.0,
-  :collar,             :steel,       30.00,        2.75,   7.75,  0.0,
-  :stabilizer,       :steel,         0.00,         2.75,   12.125,  0.0,
-  :collar,             :steel,       30.00,   2.75,   7.75,  0.0,
-  :stabilizer,       :steel,         0.00,   2.75,   12.125,  0.0,
-  :collar,             :steel,       90.00,   2.75,   7.75,  0.0,
-  :stabilizer,       :steel,         0.00,   2.75,   12.125,  0.0,
-  :pipe,               :steel,    100.00,   2.75,   7.75,  0.0
+materials = materialtable()
+println()
+display(materials)
+println()
+
+media = mediatable()
+println()
+display(media)
+println()
+
+segments = [
+# Element type,  Material,    Length,     OD,         ID,        fc,     noofelements
+  :bit,                    :steel ,        0.00,      2.75,      12.25,     0.0,         0,
+  :collar ,              :monel ,    25.00,      2.75,       7.75,      0.0,       25,  
+  :stabilizer,         :steel,         0.00,       2.75,     12.125,    0.0,         0,
+  :collar,             :steel,         30.00,      2.75,       7.75,      0.0,        30,
+  :stabilizer,       :steel,          0.00,       2.75,     12.125,    0.0,          0,
+  :collar,             :steel,        30.00,       2.75,      7.75,      0.0,         30,
+  :stabilizer,       :steel,          0.00,       2.75,     12.125,    0.0,          0,
+  :collar,             :steel,        90.00,       2.75,      7.75,      0.0,         90,
+  :stabilizer,       :steel,          0.00,       2.75,     12.125,    0.0,          0,
+  :pipe,               :steel,     100.00,       2.75,      7.75,       0.0,       100
 ];
-
-segs1 = reshape(segs2, (6, :));
-syms = Array{Symbol, 2}(reshape(segs1[1:2, :], (2, :)))
-
-global segs
-
-segs = Array{Float64, 2}(reshape(segs1[3:6, :], (4, :)))
-
-df = DataFrame([Symbol, Symbol, Float64], [:eltype, :material, :length], 0)
-append!(df, DataFrame(eltype=:bit, material=:steel, length=0.0))
 
 traj = [
 #   Heading,      Diameter
-  ( 60.0,      12.25)
+   60.0,      12.25
 ]
+
+segment_types = [Symbol, Symbol, Float64, Float64, Float64, Float64, Int]
+segment_names = [:eltype, :material, :length, :id, :od, :frictioncoefficient, :noofelements]
+
+segs = reshape(segments, (7, :));
+
+segments = DataFrame(segment_types, segment_names, 0)
+for i in 1:size(segs, 2)
+  seg = segs[:, i]
+    append!(segments,
+      DataFrame(eltype=seg[1], material=seg[2], length=seg[3], id=seg[4], od=seg[5],
+        frictioncoefficient=seg[6], noofelements=seg[7])
+    )
+end
+
+println()
+display(segments)
+println()
+
+element_types = [Symbol, Symbol, Float64, Float64, Float64, Int, Float64, Float64, Float64, Float64]
+element_names = [:eltype, :material, :length, :id, :od, :etype, :ea, :ei, :gj, :holediameter]
+
+elements = DataFrame(element_types, element_names, 0)
+j = 0
+for i in 1:size(segments, 1)
+  seg = segments[i, :]
+  if seg[:eltype][1] in [:collar, :pipe]
+    # New etype
+    j += 1          
+    append!(elements, 
+      DataFrame(eltype=seg[:eltype][1], material=seg[:material][1],
+        length=seg[:length][1], id=seg[:id][1], od=seg[:od][1], etype=j, 
+        ea=0.0, 
+        ei=1.0, 
+        gj=2.0, 
+        holediameter=traj[2]
+      )
+    )
+  end
+end
+
+println()
+display(elements)
+println()
 
 wobrange = 45:5:55
 inclinationrange = 35:5:55           # Or e.g. incls = [5, 10]
 
 println()
-@time results = tprun(segs, wobrange, inclinationrange, p44_1, ProjDir)
+@time results = tprun(Float64.(segs[3:end, :]), wobrange, inclinationrange, p44_1, ProjDir)
 
 sleep(1)
-println("\nSize of result  array of tuples = $(size(results))")
+println("\nSize of result  array of tuples = $(size(results))\n")
 
 #=
 Needs to generate something like:

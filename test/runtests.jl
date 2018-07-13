@@ -2,7 +2,7 @@ using BHAtp
 using Test
 
 code_tests = [
-  "ex01.jl",
+  #"ex01.jl",
   "fisher_a1_01.jl"
 ]
 
