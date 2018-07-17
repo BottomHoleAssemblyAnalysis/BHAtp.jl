@@ -4,7 +4,7 @@ using Test
 ProjDir = dirname(@__FILE__)
 cd(ProjDir) do
 
-  materials = materialtable()
+  #materials = materialtable()
   
   @test materials[:steel].sg == 0.283
   

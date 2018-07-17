@@ -1,4 +1,5 @@
 function createelementdf(segmentdf, traj)
+  
   element_types = [Symbol, Symbol, Float64, Float64, Float64, Int, Float64, Float64, Float64, Float64]
   element_names = [:eltype, :material, :length, :id, :od, :etype, :ea, :ei, :gj, :holediameter]
 

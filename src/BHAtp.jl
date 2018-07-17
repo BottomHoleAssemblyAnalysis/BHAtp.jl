@@ -16,10 +16,13 @@ include("base/runcase.jl")
 include("base/tprun.jl")
 include("base/p44_1.jl")
 
+materials = materialtable()
+media = mediatable()
+
 export
   tprun,
-  materialtable,
-  mediatable,
+  materials,
+  media,
   createsegmentdf,
   createelementdf,
   p44_1

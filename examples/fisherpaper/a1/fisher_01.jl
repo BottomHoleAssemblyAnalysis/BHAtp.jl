@@ -7,47 +7,47 @@ ProjName = split(ProjDir, "/")[end]
 #bha.ratio = 1.7
 #bha.medium = :lightmud
 
-materials = materialtable();
-media = mediatable();
-
 segments = [
 # Element type,  Material,    Length,     OD,         ID,        fc,     noofelements
   :bit,                    :steel ,        0.00,      2.75,      12.25,     0.0,         0,
   :collar ,              :monel ,    25.00,      2.75,       7.75,      0.0,       25,  
-  :stabilizer,         :steel,         0.00,       2.75,     12.125,    0.0,         0,
-  :collar,             :steel,         30.00,      2.75,       7.75,      0.0,        30,
-  :stabilizer,       :steel,          0.00,       2.75,     12.125,    0.0,          0,
-  :collar,             :steel,        30.00,       2.75,      7.75,      0.0,         30,
-  :stabilizer,       :steel,          0.00,       2.75,     12.125,    0.0,          0,
-  :collar,             :steel,        90.00,       2.75,      7.75,      0.0,         90,
-  :stabilizer,       :steel,          0.00,       2.75,     12.125,    0.0,          0,
-  :pipe,               :steel,     100.00,       2.75,      7.75,       0.0,       100
+  :stabilizer,          :steel,         0.00,       2.75,     12.125,    0.0,         0,
+  :collar,                :steel,         30.00,      2.75,       7.75,      0.0,        30,
+  :stabilizer,          :steel,          0.00,       2.75,     12.125,    0.0,          0,
+  :collar,                :steel,        30.00,       2.75,      7.75,      0.0,         30,
+  :stabilizer,          :steel,          0.00,       2.75,     12.125,    0.0,          0,
+  :collar,               :steel,        90.00,       2.75,      7.75,      0.0,         90,
+  :stabilizer,          :steel,          0.00,       2.75,     12.125,    0.0,          0,
+  :pipe,                  :steel,     100.00,       2.75,      7.75,       0.0,       100
 ];
 
 traj = [
-#   Heading,      Diameter
-   60.0,      12.25
+#   Heading,      Bit diameter
+        60.0,             12.25
 ]
-
-(segmentdf, segs) = createsegmentdf(segments)
-
-println()
-display(segmentdf)
-println()
-
-elementdf = createelementdf(segmentdf, traj)
-
-println()
-display(elementdf)
-println()
 
 wobrange = 45:5:55
 inclinationrange = 35:5:55           # Or e.g. incls = [5, 10]
 
+data = Dict(
+  :materials => materials,
+  :media => media,
+  :medium => :lightmud,
+  :penalty => 1e19,
+  :segments => segments,
+  :traj => traj,
+  :survey => nothing,
+  :wobrange => wobrange,
+  :inclinationrange => inclinationrange,
+  :computefunction => p44_1,
+  :pdir => ProjDir
+)
+  
 println()
-@time results = tprun(Float64.(segs[3:end, :]), wobrange, inclinationrange, p44_1, ProjDir)
+@time results = tprun(data)
 
-sleep(1)
+sleep(1) # Wait for all processes to complete
+
 println("\nSize of result  array of tuples = $(size(results))\n")
 
 #=

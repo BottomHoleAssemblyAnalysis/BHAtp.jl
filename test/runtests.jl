@@ -2,9 +2,11 @@ using BHAtp
 using Test
 
 code_tests = [
+#=
   "ex01.jl",
   "materialtable.jl",
   "mediatable.jl",
+  =#
   "fisher_a1_01.jl"
 ]
 
