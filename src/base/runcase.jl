@@ -22,8 +22,9 @@ function runcase(t::Tuple)
       (Nhp1, [0.0 -10000.0 0.0 0.0 0.0 0.0])]
   )
 
-  res = t[4](data)
   println("Case wob = $(t[2]), incl = $(t[3]) done!")
+  
+  t[4](data)
   
  end 
  

@@ -48,7 +48,10 @@ println()
 
 sleep(1) # Wait for all processes to complete
 
-println("\nSize of result  array of tuples = $(size(results))\n")
+println("\nSize of result  array of tuples = $(size(results))")
+println("Size of results[1] in results tuple = $(size(results[3][2]))\n")
+
+println(results[1][2])
 
 #=
 Needs to generate something like:
