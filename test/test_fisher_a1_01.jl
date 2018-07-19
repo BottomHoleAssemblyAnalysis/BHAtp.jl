@@ -2,7 +2,7 @@ using BHAtp
 using Test
 
 ProjDir = joinpath(dirname(@__FILE__), "..", "examples", "fisherpaper")
-cd(ProjDir) #do
+cd(ProjDir) do
 
   isdir("tmp") &&
     rm("tmp", recursive=true);
@@ -14,4 +14,4 @@ cd(ProjDir) #do
   isdir("tmp") &&
     rm("tmp", recursive=true);
 
-#end # cd
+end # cd

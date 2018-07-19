@@ -3,10 +3,6 @@ using BHAtp, DataFrames, Distributed, Test
 ProjDir = dirname(@__FILE__)
 ProjName = split(ProjDir, "/")[end]
 
-#bha = BHA(ProjName, ProjDir)
-#bha.ratio = 1.7
-#bha.medium = :lightmud
-
 segments = [
 # Element type,  Material,    Length,     OD,         ID,        fc,     noofelements
   :bit,                    :steel ,        0.00,      2.75,      12.25,     0.0,         0,
@@ -44,7 +40,7 @@ data = Dict(
 )
   
 println()
-@time results = tprun(data)
+@time results = tprun!(data)
 
 sleep(1) # Wait for all processes to complete
 
