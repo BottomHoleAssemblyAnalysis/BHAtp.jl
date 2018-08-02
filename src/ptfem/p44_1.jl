@@ -245,7 +245,7 @@ function p44_1(data::Dict{Symbol, Any})
   # can be computed directly using gsm:
   #   loads[1:neq] = gsm \ loads[1:neq]
 
-  cfgsm = VERSION.minor > 6 ? cholesky(gsm) : cholfact(gsm)
+  cfgsm = cholesky(gsm)
   loads[1:neq] = cfgsm \ loads[1:neq]
   #println()
 
