@@ -11,8 +11,8 @@ using SparseArrays, LinearAlgebra
 
 # init routines (called from BHAtp.jl)
 
-include("init/materialtable.jl")
-include("init/mediatable.jl")
+include("init/materialdict.jl")
+include("init/mediadict.jl")
 
 # user visible (called from e.g. example projects)
 
@@ -33,15 +33,15 @@ include("ptfem/p44_1.jl")
 
 # These table are created here, a user might update and/or add to these dicts
 
-materials = materialtable()
-media = mediatable()
+materials = materialdict()
+media = mediadict()
 
 export
-  tprun!,
   materials,
   media,
   #updatedmaterialstable,
   #updatemedatable,
+  tprun!,
   p44_1
 
 end # module

@@ -1,4 +1,4 @@
-function mediatable()
+function mediadict()
   Dict(
     :mud => 11.35,
     :water => 8.339,
