@@ -1,4 +1,4 @@
-using BHAtp, DataFrames, Distributed, Test
+using BHAtp
 
 ProjDir = dirname(@__FILE__)
 ProjName = split(ProjDir, "/")[end]
@@ -26,25 +26,10 @@ wobrange = 45:5:55
 inclinationrange = 35:5:55           # Or e.g. incls = [5, 10]
 
 println()
-#=
-prob = problem(segments, traj, wobrange, inclinatioinrange,
-  medium=:lightmud, computefunction=PtFEM.p44, pdir=ProjDir)
-=#
 
-prob = Dict(
-  :materials => materials,
-  :media => media,
-  :medium => :lightmud,
-  :penalty => 1e19,
-  :segments => segments,
-  :traj => traj,
-  :survey => nothing,
-  :wobrange => wobrange,
-  :inclinationrange => inclinationrange,
-  :computefunction => PtFEM.p44,
-  :pdir => ProjDir
-)
-  
+prob = problem(segments, traj, wobrange, inclinationrange,
+  medium=:lightmud, computefunction=PtFEM.p44, pdir=ProjDir)
+
 @time results = solve!(prob)
 
 sleep(1) # Wait for all processes to complete

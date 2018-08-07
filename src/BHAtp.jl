@@ -18,6 +18,7 @@ include("init/mediadict.jl")
 
 # problem input handling
 
+include("problem/createproblem.jl")
 include("problem/createsegmentdf.jl")
 include("problem/createelementdf.jl")
 include("problem/createcasetable.jl")
@@ -40,6 +41,7 @@ export
   media,
   #updatedmaterialstable,
   #updatemedatable,
+  problem,
   solve!
 
 end # module
