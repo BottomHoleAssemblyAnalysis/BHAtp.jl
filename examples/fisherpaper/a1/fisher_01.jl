@@ -25,7 +25,13 @@ traj = [
 wobrange = 45:5:55
 inclinationrange = 35:5:55           # Or e.g. incls = [5, 10]
 
-data = Dict(
+println()
+#=
+prob = problem(segments, traj, wobrange, inclinatioinrange,
+  medium=:lightmud, computefunction=PtFEM.p44, pdir=ProjDir)
+=#
+
+prob = Dict(
   :materials => materials,
   :media => media,
   :medium => :lightmud,
@@ -35,12 +41,11 @@ data = Dict(
   :survey => nothing,
   :wobrange => wobrange,
   :inclinationrange => inclinationrange,
-  :computefunction => p44_1,
+  :computefunction => PtFEM.p44,
   :pdir => ProjDir
 )
   
-println()
-@time results = tprun!(data)
+@time results = solve!(prob)
 
 sleep(1) # Wait for all processes to complete
 

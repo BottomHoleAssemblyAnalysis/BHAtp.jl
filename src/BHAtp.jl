@@ -28,8 +28,7 @@ include("solve/solve.jl")
 
 # core ptfem based mp runs
 
-include("ptfem/runcase.jl")
-include("ptfem/p44_1.jl")
+include("threads/runcase.jl")
 
 # These table are created here, a user might update and/or add to these dicts
 
@@ -41,7 +40,6 @@ export
   media,
   #updatedmaterialstable,
   #updatemedatable,
-  solve!,
-  p44_1
+  solve!
 
 end # module
