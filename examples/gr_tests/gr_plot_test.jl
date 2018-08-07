@@ -31,8 +31,8 @@ append!(df, DataFrame(eltype=:bit, material=:steel, length=0.0))
 using GR
 x = 0:pi/10:2*pi
 y1 = sin.(x)
-y2 = sin.(x-0.25)
-y3 = sin.(x-0.5)
+y2 = sin.(x .- 0.25)
+y3 = sin.(x .- 0.5)
 
 plot(x,y1,"g",x,y2,"--",x,y2,"g--o",x,y3,"-",x,y3,"c*")
 savefig("$(ProjDir)/gr_plot_test.pdf")

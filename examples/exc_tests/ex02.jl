@@ -1,4 +1,4 @@
-using Compat, BHAtp
+using BHAtp
 
 ProjDir = dirname(@__FILE__)
 
@@ -31,12 +31,12 @@ data = Dict(
 
 data[:z_coords] = VERSION.minor < 7 ? linspace(0, 4, Np1) :  range(0, stop=4, length=Np1)
 
-@time m, dis_df, fm_df = p44_1(data)
+@time m, dis_df, fm_df = PtFEM.p44(data)
 
 data |> display
 println()
 
-m, dis_df, fm_df = p44_1(data)
+m, dis_df, fm_df = PtFEM.p44(data)
 
 println("Displacements:")
 display(dis_df)
@@ -46,6 +46,7 @@ println("Actions:")
 display(fm_df)
 println()
 
+#=
 using Plots
 gr(size=(400,600))
 
@@ -59,6 +60,7 @@ p[3] = plot(m.actions[11,:], lab="Moment", ylim=(-4200, 3000), xlabel="element",
 
 plot(p..., layout=(3, 1))
 savefig(ProjDir*"/figure-02.png")
+=#
 #=
 plot!()
 gui()

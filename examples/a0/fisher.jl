@@ -1,4 +1,4 @@
-using PtFEM
+using BHAtp
 
 ProjDir = dirname(@__FILE__)
 
@@ -43,7 +43,7 @@ data = Dict(
 data |> display
 println()
 
-@time fem, dis_df, fm_df = p44(data)
+@time fem, dis_df, fm_df = PtFEM.p44(data)
 println()
 
 display(dis_df)

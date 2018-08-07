@@ -1,4 +1,4 @@
-using Compat, BHAtp
+using BHAtp
 
 ProjDir = dirname(@__FILE__)
 
@@ -43,7 +43,7 @@ data[:z_coords] = VERSION.minor < 7 ? linspace(0, L, Np1) :  range(0, stop=L, le
 
 count = 0
 while count < 6
-  @time m, dis_df, fm_df = p44_1(data)
+  @time m, dis_df, fm_df = PtFEM.p44(data)
   #display(dis_df)
   if m.displacements[1, 13] > 0.0002
     #@show data[:loaded_nodes][13][2][1]
@@ -57,7 +57,7 @@ end
 data |> display
 println()
 
-m, dis_df, fm_df = p44_1(data)
+m, dis_df, fm_df = PtFEM.p44(data)
 
 println("Displacements:")
 display(dis_df)
