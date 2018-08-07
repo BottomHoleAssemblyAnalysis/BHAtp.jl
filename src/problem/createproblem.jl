@@ -1,8 +1,7 @@
-function  problem(segments, traj, wobrange, inclinationrange,
+function  problem(segments, traj, wobrange, inclinationrange;
   materials=materials, media=media, medium=:lightmud,
-  computefunction=PtFEM.p44, pdir=ProjDir)
+  penalty=1.0e9, computefunction=PtFEM.p44, pdir=ProjDir)
   
-  println("In problem")
   prob = Dict(
     :segments => segments,
     :traj => traj,
@@ -10,13 +9,12 @@ function  problem(segments, traj, wobrange, inclinationrange,
     :inclinationrange => inclinationrange,
     :materials => materials,
     :media => media,
-    :medium => :lightmud,
-    :penalty => 1e19,
+    :medium => medium,
+    :penalty => penalty,
     :survey => nothing,
-    :computefunction => PtFEM.p44,
-    :pdir => ProjDir
+    :computefunction => computefunction,
+    :pdir => pdir
   )
-  
   
   prob
 end
