@@ -1,4 +1,4 @@
- function tprun!(data)
+ function solve!(data)
    
    segmentdf = createsegmentdf(data[:segments])
    data[:segmentdf] = segmentdf

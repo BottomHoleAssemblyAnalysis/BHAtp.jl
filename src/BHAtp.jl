@@ -13,18 +13,18 @@ using SparseArrays, LinearAlgebra
 
 include("init/materialdict.jl")
 include("init/mediadict.jl")
+#include("init/updatematerialtable.jl")
+#include("init/updatemediatable.jl")
+
+# problem input handling
+
+include("problem/createsegmentdf.jl")
+include("problem/createelementdf.jl")
+include("problem/createcasetable.jl")
 
 # user visible (called from e.g. example projects)
 
-include("user/tprun.jl")
-#include("user/updatematerialtable.jl")
-#include("user/updatemediatable.jl")
-
-# tprun 
-
-include("tprun/createsegmentdf.jl")
-include("tprun/createelementdf.jl")
-include("tprun/createcasetable.jl")
+include("solve/solve.jl")
 
 # core ptfem based mp runs
 
@@ -41,7 +41,7 @@ export
   media,
   #updatedmaterialstable,
   #updatemedatable,
-  tprun!,
+  solve!,
   p44_1
 
 end # module
