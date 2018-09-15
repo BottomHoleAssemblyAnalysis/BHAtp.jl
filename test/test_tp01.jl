@@ -3,9 +3,7 @@ using BHAtp, Test
 ProjDir = dirname(@__FILE__)
 ProjName = split(ProjDir, "/")[end]
 
-data = Dict{Symbol, Any}()
-
-data[:segs] = [
+bha[:segs] = [
 # Element type,  Material,    Length,     OD,         ID,      fc,    NoOfElements
   (:bit,          :steel,     0.00,   2.75,   9.0,  0.0),
   (:collar,       :steel,    45.00,   2.75,   7.0,  0.0),
@@ -17,24 +15,18 @@ data[:segs] = [
   (:pipe,         :steel,   100.00,   2.75,   7.0,  0.0)
 ]
 
-data[:traj] = [
+bha[:traj] = [
 #   Heading,      Diameter
   ( 60.0,      9.0)
 ]
 
-data[:wobs] = 20:10:40
-data[:incls] = 20:10:40             # Or e.g. incls = [5 10 20 30 40 45 50]
+bha[:wobs] = 20:10:40
+bha[:incls] = 20:10:40               # Or e.g. incls = [5 10 20 30 40 45 50]
 
-data[:materials] = materials
-data[:media] = media
-data[:noofelements] = Int(sum([data[:segs][i][3] for i in 1:length(data[:segs])]))
-data[:noofnodes] = data[:noofelements] + 1
+mesh, properties, nodes, elements = input(bha)
 
-elements = [BHAtp.Element() for i in 1:data[:noofelements]]
-nodes = [BHAtp.Node() for i in 1:data[:noofnodes]]
-
-@test data[:materials][:monel].sg == 0.319
-@test data[:noofelements] == 265
+@test bha[:materials][:monel].sg == 0.319
+@test bha[:noofelements] == 265
 @test size(elements) == (265, )
 
 println(BHAtp.MeshRecord())

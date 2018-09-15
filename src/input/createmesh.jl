@@ -1,29 +1,29 @@
-function createmesh!(data::Dict{Symbol, Any})
+function createmesh!(bhadata::Dict{Symbol, Any})
   
-  seg = data[:segs]
-  bha[:materials] = materials
+  seg = bhadata[:segs]
+  bhadata[:materials] = materials
     # Future: Use updatematerialtable() to add or change an entry in the materials table
-  bha[:media] = media
+  bhadata[:media] = media
   # Future: Use updatemediatable() to add or change an entry in the media table
-  bha[:medium] = :mud
-  bha[:noofelements] = Int(sum([bha[:segs][i][3] for i in 1:length(bha[:segs])]))
-  bha[:noofnodes] = bha[:noofelements] + 1
+  bhadata[:medium] = :mud
+  bhadata[:noofelements] = Int(sum([bha[:segs][i][3] for i in 1:length(bha[:segs])]))
+  bhadata[:noofnodes] = bha[:noofelements] + 1
 
-  elements = [BHAtp.Element() for i in 1:data[:noofelements]]
-  nodes = [BHAtp.Node() for i in 1:data[:noofnodes]]
-  mesh = [BHAtp.MeshRecord() for i in  1:data[:noofelements]]
-  propertties = fill(0.0, length(seg), 4)
+  elements = [BHAtp.Element() for i in 1:bhadata[:noofelements]]
+  nodes = [BHAtp.Node() for i in 1:bhadata[:noofnodes]]
+  mesh = [BHAtp.MeshRecord() for i in  1:bhadata[:noofelements]]
+  properties = fill(0.0, length(seg), 4)
 
   el = 0
-  sgmedium = data[:media][data[:medium]] / 231.     # in [in^3]
+  sgmedium = bhadata[:media][bhadata[:medium]] / 231.     # in [in^3]
   for i in 1:length(seg)
-    mat = data[:materials][seg[i][2]]
+    mat = bhadata[:materials][seg[i][2]]
     radius = seg[i][5] / 2.0
     dm2 = seg[i][5]^2 - seg[i][4]^2
     dm4 = seg[i][5]^4 - seg[i][4]^4
     dp2 = seg[i][5]^2 + seg[i][4]^2
     if seg[i][1] in [:bit, :stabilizer]
-      if (el+1) < data[:noofelements] && radius > nodes[el+1].stringradius
+      if (el+1) < bhadata[:noofelements] && radius > nodes[el+1].stringradius
         nodes[el+1].fc = seg[i][6]
         nodes[el+1].stringradius = radius
       end
@@ -43,7 +43,7 @@ function createmesh!(data::Dict{Symbol, Any})
       # Polar moment of inertia: Pi * r^4 / 2 or Pi * d^4 / 32
       
       ea = csa * mat.ea
-      er = pi * mat.ex * dm4 / 64
+      er = pi * mat.er * dm4 / 64
       gj = pi * mat.gj * dm4 / 32
 
       for j in 1:nels
@@ -52,8 +52,8 @@ function createmesh!(data::Dict{Symbol, Any})
       	# nodes[1] is usually the bit or a 1st support for deflection testing
       	# nodes[1] = 0.0, add length of element.
 
-        nodes[el+1].z = nodes[el].z + elength
-        if typeof(seg[i]) in [Pipe, Collar]
+        nodes[el+1].x = nodes[el].x + elength
+        if typeof(seg[i]) in [:pipe, :collar]
           elements[el].ea = ea
           elements[el].er = er
           elements[el].gj = gj
@@ -70,7 +70,7 @@ function createmesh!(data::Dict{Symbol, Any})
           nodes[el].fc = seg[i][6]
         end
 				nodes[el].stringradius = max(radius, nodes[el].stringradius)
-				nodes[el+1].fc = seg[i].fc
+				nodes[el+1].fc = seg[i][6]
 				nodes[el+1].stringradius = radius
 		
 				# Pattern always the same, asign 0.5 to this node and 0.5 to next node,
@@ -79,9 +79,9 @@ function createmesh!(data::Dict{Symbol, Any})
 				nodes[el].weight += eweight / 2.0
 				nodes[el+1].weight = eweight / 2.0
 		
-				# Set element data if it is not a "(Exc)Stab(ilizer)" or "NBS" or "Bit" or "Rig"
+				# Set element bhadata if it is not a "(Exc)Stab(ilizer)" or "NBS" or "Bit" or "Rig"
 
-				if typeof(seg[i]) in [Pipe, Collar]
+				if typeof(seg[i]) in [:pipe, :collar]
 					elements[el].fc = seg[i][6]
 					elements[el].length = elength
 					elements[el].radius = radius

@@ -18,12 +18,13 @@ include("util/types.jl")
 include("input/creatematerialdict.jl")
 include("input/createmediadict.jl")
 include("input/createmesh.jl")
+include("input/input.jl")
 #include("input/updatematerialtable.jl")
 #include("input/updatemediatable.jl")
 
 # problem input handling
 
-include("problem/createproblem.jl")
+include("problem/problem.jl")
 include("problem/createsegmentdf.jl")
 include("problem/createelementdf.jl")
 include("problem/createcasetable.jl")
