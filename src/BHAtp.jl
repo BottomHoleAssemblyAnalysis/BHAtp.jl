@@ -9,12 +9,17 @@ using SparseArrays, LinearAlgebra
 
 @reexport using PtFEM
 
-# init routines (called from BHAtp.jl)
+# General utilities
 
-include("init/materialdict.jl")
-include("init/mediadict.jl")
-#include("init/updatematerialtable.jl")
-#include("init/updatemediatable.jl")
+include("util/types.jl")
+
+# input routines (called from BHAtp.jl)
+
+include("input/creatematerialdict.jl")
+include("input/createmediadict.jl")
+include("input/createmesh.jl")
+#include("input/updatematerialtable.jl")
+#include("input/updatemediatable.jl")
 
 # problem input handling
 
@@ -33,14 +38,17 @@ include("threads/runcase.jl")
 
 # These table are created here, a user might update and/or add to these dicts
 
-materials = materialdict()
-media = mediadict()
+bha = Dict{Symbol, Any}()
+materials = creatematerialdict()
+media = createmediadict()
 
 export
+  bha,
   materials,
   media,
   #updatedmaterialstable,
   #updatemedatable,
+  input,
   problem,
   solve!
 

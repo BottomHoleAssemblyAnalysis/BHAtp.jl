@@ -2,10 +2,12 @@ using BHAtp
 using Test
 
 code_tests = [
-  "ex01.jl",
+  #"ex01.jl",
   "materialtable.jl",
   "mediatable.jl",
-  "fisher_a1_01.jl"
+  #"createmesh.jl",
+  #"fisher_a1_01.jl",
+  "tp01.jl"
 ]
 
 println("\n\nRunning BottomHoleAssemblyAnalysis/BHatp.jl tests:\n\n")

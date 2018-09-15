@@ -1,4 +1,4 @@
-function materialdict()
+function creatematerialdict()
   Dict(
     :steel => (sg=0.283, ea=29.0e6, ei=29.0e6, gj=11.5e6),
     :monel => (sg=0.319, ea=26.0e6, ei=26.0e6, gj=9.9e6),
