@@ -23,9 +23,20 @@ bha[:traj] = [
 bha[:wobs] = 20:10:40
 bha[:incls] = 20:10:40               # Or e.g. incls = [5 10 20 30 40 45 50]
 
-mesh, properties, nodes, elements = input(bha)
+properties, nodes, elements = input!(bha)
 
-# ... = problem()
+properties |> display
+println()
+
+nodes |> display
+println()
+
+elements |> display
+println()
+
+
+
+# mesh = problem()
 
 # ... = solve()
 

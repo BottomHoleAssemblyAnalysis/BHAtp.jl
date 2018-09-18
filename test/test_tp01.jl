@@ -23,13 +23,20 @@ bha[:traj] = [
 bha[:wobs] = 20:10:40
 bha[:incls] = 20:10:40               # Or e.g. incls = [5 10 20 30 40 45 50]
 
-mesh, properties, nodes, elements = input(bha)
+properties, nodes, elements = input(bha)
 
 @test bha[:materials][:monel].sg == 0.319
 @test bha[:noofelements] == 265
 @test size(elements) == (265, )
 
-println(BHAtp.MeshRecord())
+properties |> display
+println()
+
+nodes[1:5] |> display
+println()
+
+elements[1:5] |> display
+println()
 
 #=
 Needs to generate something like:

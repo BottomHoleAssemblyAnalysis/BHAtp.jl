@@ -17,7 +17,6 @@ include("util/types.jl")
 
 include("input/creatematerialdict.jl")
 include("input/createmediadict.jl")
-include("input/createmesh.jl")
 include("input/input.jl")
 #include("input/updatematerialtable.jl")
 #include("input/updatemediatable.jl")
@@ -25,6 +24,7 @@ include("input/input.jl")
 # problem input handling
 
 include("problem/problem.jl")
+include("problem/createmesh.jl")
 include("problem/createsegmentdf.jl")
 include("problem/createelementdf.jl")
 include("problem/createcasetable.jl")
@@ -49,7 +49,7 @@ export
   media,
   #updatedmaterialstable,
   #updatemedatable,
-  input,
+  input!,
   problem,
   solve!
 

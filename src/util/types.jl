@@ -89,42 +89,29 @@ end
 MeshRecord() = MeshRecord(0.0, 0.0, 0.0, 1, 1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
 
 """
-# Finite Element object
+# BHA element object
 
-Element: Finite element object
+BHA element object
 
 ### Type
 ```julia
-Element(length, id, od, radius, fc, inclination, heading, ea, er, gl)
+Element(length, id, od, npind)
 ```
 ### Arguments
 ```julia
 * `length`      : Length of element
-* `id`          : Inside diameter
-* `od`          : Outside diameter
-* `radius`      : Radius
-* `fc`          : Friction coefficient
-* `inclination` : Inclination [Radians]
-* `heading`     : Heading [Radians]
-          Young moduli
-* `ea`          : E*A in z direction
-* `er`          : E*I in r direction
-* `gj`          : Shear modulus
+* `id`             : Inside diameter
+* `od`            : Outside diameter
+* `npind`       : Index (row no) in property array
 ```
 """
 mutable struct Element
   length::Float64
   id::Float64                 # Inside diameter
   od::Float64                 # Outside diameter
-  radius::Float64
-  fc::Float64                 # Friction coefficient
-  inclination::Float64
-  heading::Float64
-  ea::Float64
-  er::Float64
-  gj::Float64
+  npind::Int
 end
-Element() = Element(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+Element() = Element(0.0, 0.0, 0.0, 0)
 
 """
 # Node object
@@ -141,32 +128,14 @@ Node(z, x, y, tvd, xvert, inclination, deltainclination, dip,
 ```
 ### Fields
 ```julia
-* `x`                 : x coordinate
-* `y`                 : y coordinate
-* `tvd`               : Measured depth
-* `xvert`             : True vertical depth
-* `inclination`       : Inclination [Radians]
-* `deltainclination`  : Add'l inclinationination angle (bentsub) [Radians]
-* `dip`               : Dip at node [Radians]
-* `holeradius`        : Hole radius
-* `stringradius`      : String radius
-* `fc`                : Friction coefficient
-* `clearance`         : Clearance element in hole
-* `weight`            : Weight (force)
+* `bharadius`         : String radius
+* `weight`              : Weight (force)
+* `fc`                      : Friction coefficient
 ```
 """
 mutable struct Node
-  x::Float64
-  y::Float64
-  tvd::Float64
-  xvert::Float64
-  inclination::Float64
-  deltainclination::Float64
-  dip::Float64
-  holeradius::Float64
-  stringradius::Float64
-  fc::Float64
-  clearance::Float64
+  bharadius::Float64
   weight::Float64
+  fc::Float64
 end
-Node() = Node(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+Node() = Node(0.0, 0.0, 0.0)
