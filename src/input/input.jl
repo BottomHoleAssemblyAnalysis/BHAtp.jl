@@ -1,4 +1,4 @@
-function input!(bha)
+function input!(bhadata::Dict{Symbol, Any})
   seg = bhadata[:segs]
   bhadata[:materials] = materials
     # Future: Use updatematerialtable() to add or change an entry in the materials table
