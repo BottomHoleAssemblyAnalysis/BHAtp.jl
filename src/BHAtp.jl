@@ -26,6 +26,8 @@ include("input/input.jl")
 include("problem/problem.jl")
 include("problem/createmesh.jl")
 include("problem/createsegmentdf.jl")
+include("problem/createpropertydf.jl")
+include("problem/createnodedf.jl")
 include("problem/createelementdf.jl")
 include("problem/createcasetable.jl")
 

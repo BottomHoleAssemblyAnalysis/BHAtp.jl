@@ -25,15 +25,17 @@ bha[:incls] = 20:10:40               # Or e.g. incls = [5 10 20 30 40 45 50]
 
 properties, nodes, elements = input!(bha)
 
-properties |> display
-println()
+bha[:segments] |> display
+println("\n")
 
-nodes |> display
-println()
+bha[:properties] |> display
+println("\n")
 
-elements |> display
-println()
+bha[:nodes] |> display
+println("\n")
 
+bha[:elements] |> display
+println("\n")
 
 
 # mesh = problem()

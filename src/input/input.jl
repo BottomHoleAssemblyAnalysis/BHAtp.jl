@@ -78,9 +78,10 @@ function input!(bhadata::Dict{Symbol, Any})
   end
   
   properties = properties[1:propertiesindex, :]
-  bha[:properties] = properties
-  bha[:elements] = elements
-  bha[:nodes] = nodes
+  bha[:properties] = createpropertydf(properties)
+  bha[:segments] = createsegmentdf(seg)
+  bha[:elements] = createelementdf(elements)
+  bha[:nodes] = createnodedf(nodes)
   
   (properties, nodes, elements)
 end

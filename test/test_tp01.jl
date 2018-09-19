@@ -4,7 +4,7 @@ ProjDir = dirname(@__FILE__)
 ProjName = split(ProjDir, "/")[end]
 
 bha[:segs] = [
-# Element type,  Material,    Length,     OD,         ID,      fc,    NoOfElements
+# Element type,  Material,    Length,     ID,         OD,      fc
   (:bit,          :steel,     0.00,   2.75,   9.0,  0.0),
   (:collar,       :steel,    45.00,   2.75,   7.0,  0.0),
   (:stabilizer,   :steel,     0.00,   2.75,   9.0,  0.0),
@@ -29,14 +29,17 @@ properties, nodes, elements = input!(bha)
 @test bha[:noofelements] == 265
 @test size(elements) == (265, )
 
-properties |> display
-println()
+bha[:segments] |> display
+println("\n")
 
-nodes[1:5] |> display
-println()
+bha[:properties] |> display
+println("\n")
 
-elements[1:5] |> display
-println()
+bha[:nodes] |> display
+println("\n")
+
+bha[:elements] |> display
+println("\n")
 
 #=
 Needs to generate something like:
