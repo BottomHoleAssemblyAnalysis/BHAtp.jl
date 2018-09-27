@@ -15,13 +15,13 @@ bha[:segs] = [
   (:pipe,         :steel,   100.00,   2.75,   7.0,  0.0)
 ]
 
-bha[:traj] = [
+traj = [
 #   Heading,      Diameter
   ( 60.0,      9.0)
 ]
 
-bha[:wobs] = 20:10:40
-bha[:incls] = 20:10:40               # Or e.g. incls = [5 10 20 30 40 45 50]
+wobs = 20:10:40
+incls = 20:10:40               # Or e.g. incls = [5 10 20 30 40 45 50]
 
 properties, nodes, elements = input!(bha)
 
@@ -40,6 +40,8 @@ println("\n")
 
 bha[:elements] |> display
 println("\n")
+
+pfem = problem(bha, traj, wobs, incls, pdir=ProjDir)
 
 #=
 Needs to generate something like:

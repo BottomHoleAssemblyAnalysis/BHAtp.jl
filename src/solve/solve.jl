@@ -1,16 +1,13 @@
- function solve!(data)
+ function solve(pfem)
    
-   segmentdf = createsegmentdf(data[:segments])
-   data[:segmentdf] = segmentdf
-
-   elementdf = createelementdf(segmentdf, data[:traj])
-   data[:elementdf] = elementdf
-   
+   #=
    casetable = createcasetable(elementdf,
       data[:wobrange], data[:inclinationrange],
       data[:computefunction], data[:pdir])
       
    pmap(runcase, casetable)
-   
+   =#
+   fem, dis_df, fm_df = PtFEM.p44(pfem)
+   (fem, dis_df, fm_df)
  end
  

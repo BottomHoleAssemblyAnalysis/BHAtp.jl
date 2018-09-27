@@ -53,6 +53,6 @@ export
   #updatemedatable,
   input!,
   problem,
-  solve!
+  solve
 
 end # module
