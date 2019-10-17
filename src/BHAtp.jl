@@ -1,5 +1,3 @@
-__precompile__()
-
 module BHAtp
 
 # package code goes here
