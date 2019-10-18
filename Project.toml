@@ -26,7 +26,7 @@ test = ["Test"]
 
 [compat]
 julia = "^1.3"
-compat = "^2"
+Compat = "^2"
 CustomUnitRanges = "^0.2"
 DataFrames = "^0.19"
 FinEtools = "^3"
