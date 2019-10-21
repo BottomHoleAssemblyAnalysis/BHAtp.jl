@@ -44,9 +44,3 @@ df[:,[2; 5:6; 9:12]] |> display
 println()
 
 show_tp(ProjDir, wobs, incls) |> display
-
-#=
-isdir(joinpath(ProjDir, "tp0")) && rm(joinpath(ProjDir, "tp0"), recursive=true)
-isdir(joinpath(ProjDir, "tp")) && rm(joinpath(ProjDir, "tp"), recursive=true)
-isdir(joinpath(ProjDir, "plots")) && rm(joinpath(ProjDir, "plots"), recursive=true)
-=#

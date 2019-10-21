@@ -5,11 +5,17 @@ using Interpolations
 using Distributed
 using CSV
 
-# package code goes here
+# Types and derived types
 
 include("Types.jl")
 include("Parameters.jl")
 include("Dataframes.jl")
+
+# Exported methods
+
+include("Bha.jl")
+include("TheoreticalPerformance.jl")
+include("ShowFunctions.jl")
 
 # Base level methods
 
@@ -33,12 +39,6 @@ include("GeometricMatrix.jl")
 include("Weightforces.jl")
 include("EndForces.jl")
 
-# Exported methods
-
-include("Bha.jl")
-include("TheoreticalPerformance.jl")
-include("ShowFunctions.jl")
-
 export
   BHAJ,
   tp!,
@@ -47,6 +47,5 @@ export
   create_final_tp_df,
   create_element_df,
   create_node_df
-
 
 end # module

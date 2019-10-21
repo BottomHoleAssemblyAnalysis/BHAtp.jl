@@ -12,12 +12,8 @@ function finalinit!(params::Parameters)
     params.nodes[params.noofnodes].clearance = 0.0
   end
   
-  #params.del[2, 2, 1] = 0.0 # y sin wt coef
-  #params.del[1, 3, 1] = 0.0# x cos wt coef
   params.bf[1, 1, 1] = cos(params.nodes[1].dip) * params.nodes[1].weight
   params.f[1, 1, 1] = params.bf[1, 1, 1]
-  #params.bf[1, 1, 1] = 0.0
-  #params.bf[2, 1, 1] = 0.0
   
   # Still figuring out if below adjustment is needed for bit
   params.fn[1] = -params.wob + sin(params.nodes[1].dip) * params.nodes[1].weight
@@ -37,13 +33,8 @@ function finalinit!(params::Parameters)
     params.bf[1, 1, i] = cos(params.nodes[i].dip) * params.nodes[i].weight
     params.f[1, 1, i] = params.bf[1, 1, i]
     params.del[1, 1, i] = params.nodes[i].x - params.nodes[i].clearance
-    
-    # Should the y-coordinate initial offset be 0.001?
     params.del[2, 1, i] = params.nodes[i].y + 0.001 * params.nodes[i].clearance
     
-    #params.bf[1, 1, i] = cos(params.nodes[i].dip) * params.nodes[i].weight
-    #params.bf[1, 1, i] = 0.0
-    #params.bf[2, 1, i] = 0.0
     params.fn[i] = params.fn[i-1] + sin(params.nodes[i].dip) * params.nodes[i].weight
     params.friction[i] = 
       params.nodes[i].fc * sqrt(params.bf[1, 1, i]^2 + params.bf[2, 1, i]^2)
@@ -63,7 +54,6 @@ function finalinit!(params::Parameters)
     
     params.del[4, 1, i] = (params.nodes[i].y - params.nodes[i-1].y) / l
     params.del[5, 1, i] = (params.nodes[i].x - params.nodes[i-1].x) / l
-    #params.del[6, 1, i] = params.del[6, 1, i-1] + params.torque * l / params.elements[i-1].gj
   end
   
   # Below vectors are initialized from the top

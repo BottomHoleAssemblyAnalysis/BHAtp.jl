@@ -8,7 +8,7 @@ tests = Array{String, 1}([
 ])
 
 for test in tests
-	println()
+  println()
   println("\nRunning $(test)_test.jl.\n")
   include(test*"_test.jl")
   println()
