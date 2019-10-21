@@ -14,6 +14,15 @@ include("utils/Dataframes.jl")
 
 # Base level methods
 
+include("base/EndForces.jl")
+include("base/InertiaForces.jl")
+include("base/CurvatureForces.jl")
+include("base/InitialRelease.jl")
+include("base/ExceedanceAdjustment.jl")
+include("base/FinalRelease.jl")
+include("base/Fem.jl")
+include("base/TpRunSetup.jl")
+include("base/FinalInit.jl")
 include("base/CreateMaterialTable.jl")
 include("base/CreateMediaTable.jl")
 include("base/CheckInput.jl")
@@ -24,16 +33,6 @@ include("base/DalphaInit.jl")
 include("base/Stiffness.jl")
 include("base/GeometricMatrix.jl")
 include("base/Weightforces.jl")
-
-include("base/EndForces.jl")
-include("base/InertiaForces.jl")
-include("base/CurvatureForces.jl")
-include("base/InitialRelease.jl")
-include("base/ExceedanceAdjustment.jl")
-include("base/FinalRelease.jl")
-include("base/Fem.jl")
-include("base/TpRunSetup.jl")
-include("base/FinalInit.jl")
 
 # Exported methods
 
