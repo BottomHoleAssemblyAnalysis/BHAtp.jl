@@ -1,10 +1,4 @@
 *.jl.cov
 *.jl.*.cov
 *.jl.mem
-#Manifest.toml
-case/tp
-case/tp0
-case/params
-test/tp
-test/tp0
-test/params
+Manifest.toml

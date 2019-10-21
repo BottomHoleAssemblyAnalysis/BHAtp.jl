@@ -74,7 +74,7 @@ function tp!(data::Dict{Symbol, Any})
   if :terminated in keys(data)
     return
   end
-	println("Input data checks completed!\n")
+	println("BHA input data checks completed!\n")
   
   wobrange = data[:wobrange]
   inclrange = data[:inclrange]
