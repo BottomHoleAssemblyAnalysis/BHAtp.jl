@@ -2,7 +2,6 @@ module BHAtp
 
 using DataFrames
 using Interpolations
-using Documenter
 using Distributed
 using CSV
 
@@ -14,7 +13,6 @@ include("Dataframes.jl")
 
 # Base level methods
 
-include("EndForces.jl")
 include("InertiaForces.jl")
 include("CurvatureForces.jl")
 include("InitialRelease.jl")
@@ -33,6 +31,7 @@ include("DalphaInit.jl")
 include("Stiffness.jl")
 include("GeometricMatrix.jl")
 include("Weightforces.jl")
+include("EndForces.jl")
 
 # Exported methods
 
