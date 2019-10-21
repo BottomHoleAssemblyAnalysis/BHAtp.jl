@@ -1,14 +1,17 @@
-using BHAtp, CSV, Profile
-const TP = BHAtp
-const profile = false
+using BHAtp
 
-ProjDir = dirname(@__FILE__)
+ProjDir = @__DIR__
+
+isdir(joinpath(ProjDir, "tp0")) && rm(joinpath(ProjDir, "tp0"), recursive=true)
+isdir(joinpath(ProjDir, "tp")) && rm(joinpath(ProjDir, "tp"), recursive=true)
+isdir(joinpath(ProjDir, "plots")) && rm(joinpath(ProjDir, "plots"), recursive=true)
+
 ProjName = split(ProjDir, "/")[end]
 bhaj = BHAJ(ProjName, ProjDir)
 bhaj.ratio = 1.7
 
 segs = [
-# Element type,  Material,    Length,     OD,         ID,      fc,    NoOfElements
+# Element type,  Material,    Length,     OD,         ID,      fc
   (:bit,          :steel,     0.00,   2.75,   9.0,  0.0),
   (:collar,       :steel,    45.00,   2.75,   7.0,  0.0),
   (:stabilizer,   :steel,     0.00,   2.75,   9.0,  0.0),
@@ -27,37 +30,23 @@ traj = [
 wobs = 20:10:40
 incls = 20:10:40             # Or e.g. incls = [5 10 20 30 40 45 50]
 
-if profile
-  Profile.clear()
-  Profile.@profile bhaj(segs, traj, wobs, incls)
-  Profile.print()
-  println()
-else
-  @time bhaj(segs, traj, wobs, incls)
-  println()
-end
+@time bhaj(segs, traj, wobs, incls)
+println()
 
-display("Fetch tp=false, wob=40, incl@bit=20 solution:")
+display("Fetch tp=0, wob=40, incl@bit=20 solution:")
 df,df_tp = show_solution(ProjDir, 40, 20, show=false, tp=false)
 df[:,[2; 5:6; 9:12]] |> display
 println()
 
-println("Fetch tp=true, wob=40, incl@bit=20 solution:")
+println("Fetch wob=40, incl@bit=20 solution:")
 df,df_tp = show_solution(ProjDir, 40, 20, show=false);
 df[:,[2; 5:6; 9:12]] |> display
 println()
 
 show_tp(ProjDir, wobs, incls) |> display
-println()
 
-#create_final_tp_df(ProjDir, wobs, incls) |> display
-println()
-
-elementdf = create_element_df(ProjDir)
-elementdf[[1, 12, 20, 42], [1, 2, 3, 9, 10, 11]] |> display
-println()
-
-nodedf = create_node_df(ProjDir)
-nodedf[[1, 2, 12, 13, 20, 21, 42, 43, 66, 67], [3, 15, 17, 18, 19]] |> display
-println()
-
+#=
+isdir(joinpath(ProjDir, "tp0")) && rm(joinpath(ProjDir, "tp0"), recursive=true)
+isdir(joinpath(ProjDir, "tp")) && rm(joinpath(ProjDir, "tp"), recursive=true)
+isdir(joinpath(ProjDir, "plots")) && rm(joinpath(ProjDir, "plots"), recursive=true)
+=#
