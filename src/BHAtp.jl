@@ -1,6 +1,5 @@
 module BHAtp
 
-#using DataStructures
 using DataFrames
 using Interpolations
 using Documenter
