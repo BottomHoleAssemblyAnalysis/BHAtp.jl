@@ -8,3 +8,5 @@
 ## Introduction
 
 This is a 3D element-by-element program to compute the theoretical performance of a bottom hole assembly.
+
+The code previously part of this package has been moved to BHAPtFEM.jl
