@@ -1,11 +1,10 @@
-Manifest.toml
 *.jl.cov
 *.jl.*.cov
 *.jl.mem
-*.o *.so *.dylib
-*.svg
-*.vtu
-output/
-output/*
-docs/build/
-docs/site/
+#Manifest.toml
+case/tp
+case/tp0
+case/params
+test/tp
+test/tp0
+test/params

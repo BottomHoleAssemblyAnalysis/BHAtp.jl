@@ -1,56 +1,50 @@
 module BHAtp
 
+using DataFrames
+using Interpolations
+using Documenter
+using Distributed
+using CSV
+
 # package code goes here
 
-using Reexport, DataFrames, Statistics, Distributed
-using SparseArrays, LinearAlgebra 
+include("utils/Types.jl")
+include("utils/Parameters.jl")
+include("utils/Dataframes.jl")
 
-@reexport using PtFEM
-
-# General utilities
-
-include("util/types.jl")
-
-# input routines (called from BHAtp.jl)
-
-include("input/creatematerialdict.jl")
-include("input/createmediadict.jl")
-include("input/input.jl")
-#include("input/updatematerialtable.jl")
-#include("input/updatemediatable.jl")
-
-# problem input handling
-
-include("problem/problem.jl")
-include("problem/createmesh.jl")
-include("problem/createsegmentdf.jl")
-include("problem/createpropertydf.jl")
-include("problem/createnodedf.jl")
-include("problem/createelementdf.jl")
-include("problem/createcasetable.jl")
-
-# user visible (called from e.g. example projects)
-
-include("solve/solve.jl")
-
-# core ptfem based mp runs
-
-include("threads/runcase.jl")
-
-# These table are created here, a user might update and/or add to these dicts
-
-bha = Dict{Symbol, Any}()
-materials = creatematerialdict()
-media = createmediadict()
+include("exported/Bha.jl")
+include("exported/TheoreticalPerformance.jl")
+include("exported/ShowFunctions.jl")
 
 export
-  bha,
-  materials,
-  media,
-  #updatedmaterialstable,
-  #updatemedatable,
-  input!,
-  problem,
-  solve
+  BHAJ,
+  tp!,
+  show_solution,
+  show_tp,
+  create_final_tp_df,
+  create_element_df,
+  create_node_df
+
+# Base level methods
+
+include("base/CreateMaterialTable.jl")
+include("base/CreateMediaTable.jl")
+include("base/CheckInput.jl")
+include("base/CreateMesh.jl")
+include("base/Interpolate.jl")
+include("base/Xyinit.jl")
+include("base/DalphaInit.jl")
+include("base/Stiffness.jl")
+include("base/GeometricMatrix.jl")
+include("base/FinalInit.jl")
+include("base/Weightforces.jl")
+include("base/EndForces.jl")
+include("base/InertiaForces.jl")
+include("base/CurvatureForces.jl")
+include("base/InitialRelease.jl")
+include("base/ExceedanceAdjustment.jl")
+include("base/FinalRelease.jl")
+include("base/Fem.jl")
+include("base/TpRunSetup.jl")
 
 end # module
