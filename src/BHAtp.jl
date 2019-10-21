@@ -37,7 +37,7 @@ include("DalphaInit.jl")
 include("Stiffness.jl")
 include("GeometricMatrix.jl")
 include("Weightforces.jl")
-include("EndForces.jl")
+include("Endforces.jl")
 
 export
   BHAJ,
