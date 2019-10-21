@@ -24,6 +24,7 @@ include("base/DalphaInit.jl")
 include("base/Stiffness.jl")
 include("base/GeometricMatrix.jl")
 include("base/Weightforces.jl")
+
 include("base/EndForces.jl")
 include("base/InertiaForces.jl")
 include("base/CurvatureForces.jl")
