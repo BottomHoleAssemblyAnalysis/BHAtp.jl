@@ -12,19 +12,6 @@ include("utils/Types.jl")
 include("utils/Parameters.jl")
 include("utils/Dataframes.jl")
 
-include("exported/Bha.jl")
-include("exported/TheoreticalPerformance.jl")
-include("exported/ShowFunctions.jl")
-
-export
-  BHAJ,
-  tp!,
-  show_solution,
-  show_tp,
-  create_final_tp_df,
-  create_element_df,
-  create_node_df
-
 # Base level methods
 
 include("base/CreateMaterialTable.jl")
@@ -46,5 +33,21 @@ include("base/ExceedanceAdjustment.jl")
 include("base/FinalRelease.jl")
 include("base/Fem.jl")
 include("base/TpRunSetup.jl")
+
+# Exported methods
+
+include("exported/Bha.jl")
+include("exported/TheoreticalPerformance.jl")
+include("exported/ShowFunctions.jl")
+
+export
+  BHAJ,
+  tp!,
+  show_solution,
+  show_tp,
+  create_final_tp_df,
+  create_element_df,
+  create_node_df
+
 
 end # module
