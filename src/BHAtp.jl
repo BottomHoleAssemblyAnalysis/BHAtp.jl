@@ -8,37 +8,37 @@ using CSV
 
 # package code goes here
 
-include("utils/Types.jl")
-include("utils/Parameters.jl")
-include("utils/Dataframes.jl")
+include("Types.jl")
+include("Parameters.jl")
+include("Dataframes.jl")
 
 # Base level methods
 
-include("base/EndForces.jl")
-include("base/InertiaForces.jl")
-include("base/CurvatureForces.jl")
-include("base/InitialRelease.jl")
-include("base/ExceedanceAdjustment.jl")
-include("base/FinalRelease.jl")
-include("base/Fem.jl")
-include("base/TpRunSetup.jl")
-include("base/FinalInit.jl")
-include("base/CreateMaterialTable.jl")
-include("base/CreateMediaTable.jl")
-include("base/CheckInput.jl")
-include("base/CreateMesh.jl")
-include("base/Interpolate.jl")
-include("base/Xyinit.jl")
-include("base/DalphaInit.jl")
-include("base/Stiffness.jl")
-include("base/GeometricMatrix.jl")
-include("base/Weightforces.jl")
+include("EndForces.jl")
+include("InertiaForces.jl")
+include("CurvatureForces.jl")
+include("InitialRelease.jl")
+include("ExceedanceAdjustment.jl")
+include("FinalRelease.jl")
+include("Fem.jl")
+include("TpRunSetup.jl")
+include("FinalInit.jl")
+include("CreateMaterialTable.jl")
+include("CreateMediaTable.jl")
+include("CheckInput.jl")
+include("CreateMesh.jl")
+include("Interpolate.jl")
+include("Xyinit.jl")
+include("DalphaInit.jl")
+include("Stiffness.jl")
+include("GeometricMatrix.jl")
+include("Weightforces.jl")
 
 # Exported methods
 
-include("exported/Bha.jl")
-include("exported/TheoreticalPerformance.jl")
-include("exported/ShowFunctions.jl")
+include("Bha.jl")
+include("TheoreticalPerformance.jl")
+include("ShowFunctions.jl")
 
 export
   BHAJ,
