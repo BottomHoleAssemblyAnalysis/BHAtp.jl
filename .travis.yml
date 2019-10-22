@@ -1,14 +1,14 @@
 # Documentation: http://docs.travis-ci.com/user/languages/julia/
 language: julia
 
-#dist: xenial
+dist: xenial
 
 os:
   - linux
   #- osx
   
 julia:
-  - 1.3
+  - 1.0
   - nightly
   
 matrix:
@@ -19,8 +19,8 @@ matrix:
 notifications:
   email: false
   
-#git:
-#  depth: 99999999
+git:
+  depth: 99999999
   
 matrix:
   allow_failures:
@@ -28,9 +28,9 @@ matrix:
   - os: osx
 
 # uncomment the following lines to override the default test script
-#script:
-#  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-#  - julia -e 'using Pkg; Pkg.clone(pwd()); Pkg.build("BHAtp"); Pkg.test("BHAtp"; coverage=true)'
+script:
+  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+  - julia -e 'using Pkg; Pkg.clone(pwd()); Pkg.build("BHAtp"); Pkg.test("BHAtp"; coverage=true)'
 
 after_success:
-- julia -e 'using Pkg; cd(Pkg.dir("BHAtp")); Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())'
+  - julia -e 'using Pkg; cd(Pkg.dir("BHAtp")); Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())'
