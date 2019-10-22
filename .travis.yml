@@ -33,4 +33,4 @@ script:
   - julia -e 'using Pkg; Pkg.clone(pwd()); Pkg.build("BHAtp"); Pkg.test("BHAtp"; coverage=true)'
 
 after_success:
-- julia -e 'cd(Pkg.dir("BHAtp")); Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())'
+- julia -e 'using Pkg; cd(Pkg.dir("BHAtp")); Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())'
