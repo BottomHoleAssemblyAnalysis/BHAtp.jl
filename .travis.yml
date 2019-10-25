@@ -8,7 +8,9 @@ os:
   #- osx
   
 julia:
-  - 1.0
+  - 1.1
+  - 1.2
+  - 1.3
   - nightly
   
 matrix:
@@ -33,4 +35,5 @@ matrix:
 #  - julia -e 'using Pkg; Pkg.add(pwd()); Pkg.build("BHAtp"); Pkg.test("BHAtp"; coverage=true)'
 
 after_success:
-  - julia -e 'using Pkg; cd(Pkg.dir("BHAtp")); Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())'
+  - julia --project=test/coverage -e 'using Pkg; Pkg.instantiate()'
+  - julia --project=test/coverage test/coverage/coverage.jl
