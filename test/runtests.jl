@@ -4,7 +4,7 @@ using Test
 # write your own tests here
 
 tests = Array{String, 1}([
-  "{casename}"
+  "case_01"
 ])
 
 for test in tests
