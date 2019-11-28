@@ -1,9 +1,12 @@
 module BHAtp
 
-using DataFrames
-using Interpolations
-using Distributed
-using CSV
+using Reexport
+
+@reexport using PGFPlotsX, LaTeXStrings
+@reexport using DataFrames, DataFramesMeta
+@reexport using Interpolations
+@reexport using BHAtp, CSV, Distributed
+
 
 # Types and derived types
 
@@ -38,6 +41,7 @@ include("Stiffness.jl")
 include("GeometricMatrix.jl")
 include("Weightforces.jl")
 include("Endforces.jl")
+include("Savefig.jl")
 
 export
   BHAJ,
@@ -46,6 +50,7 @@ export
   show_tp,
   create_final_tp_df,
   create_element_df,
-  create_node_df
+  create_node_df,
+  savefig
 
 end # module
