@@ -1,6 +1,6 @@
 # BHAtp
 
-[![Build Status](https://travis-ci.org/BottomHoleAssemblyAnalysis/BHAtp.jl.svg?branch=master)](https://travis-ci.org/BottomHoleAssemblyAnalysis/BHAtp.jl)
+[![Build Status](https://travis-ci.com/BottomHoleAssemblyAnalysis/BHAtp.jl.svg?branch=master)](https://travis-ci.com/BottomHoleAssemblyAnalysis/BHAtp.jl)
 
 [![codecov.io](http://codecov.io/github/BottomHoleAssemblyAnalysis/BHAtp.jl/coverage.svg?branch=master)](http://codecov.io/github/BottomHoleAssemblyAnalysis/BHAtp.jl?branch=master)
 
