@@ -4,11 +4,11 @@ function create_final_tp_df(pdir, wobs, incls; ofu=true)
     for incl in incls
       filepath = joinpath(pdir, "tp", string(Int(wob)),
         string(Int(incl)), "tp.csv")
-      tp_df = DataFrame(CSV.read(filepath))
+      tp_df = CSV.read(filepath, DataFrame)
       if size(df, 1) == 0
-        df = DataFrame(tp_df[end, :])
+        df = tp_df[end, :]
       else
-        append!(df, DataFrame(tp_df[end, :]))
+        append!(df, tp_df[end, :])
       end
     end
   end
@@ -27,7 +27,7 @@ function show_tp(pdir, wobs, incls; ofu=false)
       if ofu
         #tp_df = convert_tp_to_ofu_df(filepath)
       else
-        tp_df = DataFrame(CSV.read(filepath))
+        tp_df = CSV.read(filepath, DataFrame)
       end
       if size(df, 1) == 0
         df = tp_df
@@ -49,8 +49,8 @@ function show_solution(pdir, wobs, incls; tp=true, show=true)
       assembly = tp ? "tp" : "tp0"
       solpath = joinpath(pdir, assembly, wobstring, inclstring, "solution.csv")
       tppath = joinpath(pdir, assembly, wobstring, inclstring, assembly*".csv")
-      tp && (tp_df = CSV.read(tppath))
-      df = CSV.read(solpath)
+      tp && (tp_df = CSV.read(tppath, DataFrame))
+      df = CSV.read(solpath, DataFrame)
       if show
         println("\n=====================================================")
         println("      $(assembly) (wob=$wobstring, incl=$inclstring)")
@@ -76,8 +76,8 @@ function show_solution(pdir, wob::Int, incl::Int; tp=true, show=true)
   tppath = joinpath(pdir, assembly, wobstring, inclstring, assembly*".csv")
   #tp && (tp_df = convert_tp_to_ofu_df(tppath))
   #(df = convert_to_ofu_df(solpath, wobstring, inclstring))
-  tp && (tp_df = CSV.read(tppath))
-  df = CSV.read(solpath)
+  tp && (tp_df = CSV.read(tppath, DataFrame))
+  df = CSV.read(solpath, DataFrame)
   if show
     println("\n=====================================================")
     println("      $(assembly) (wob=$wobstring, incl=$inclstring)")
